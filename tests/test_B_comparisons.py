@@ -1,3 +1,4 @@
+#Autor: A01025261   Maximiliano Carrasco Rojas 
 # File: tests/test_B_comparisons.py
 
 from unittest import TestCase

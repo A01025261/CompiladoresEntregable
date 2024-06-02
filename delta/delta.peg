@@ -15,7 +15,8 @@ block = '{' statement* '}'
 while = 'while' expression block
 do_while = 'do' block 'while' expression ';'
 comparison = additive (('==' / '!=' / '>=' / '>' / '<=' / '<') additive)*
-expression = comparison ('&&' comparison)*
+expression = expression_OR ('&&' expression_OR)*
+expression_OR = comparison ('||' comparison)*
 additive = multiplicative (('+' / '-' ) multiplicative)*
 multiplicative = unary (('*' / '/' / '%') unary)*
 unary = ('+' / '-' / '!')* primary

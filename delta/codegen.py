@@ -89,6 +89,21 @@ class CodeGenerationVisitor(PTNodeVisitor):
                        + '    i32.const 0\n'
                        + '    end\n') * (len(children) - 1))
         return ''.join(result)
+    
+    def visit_expression_OR(self, node, children):
+        if len(children) == 1:
+            return children[0]
+        result = [children[0]]
+        for i, exp in enumerate(children[1:]):
+            result.append('    if (result i32)\n')
+            result.append('    i32.const 1\n')  # If the current expression is true, we return true
+            result.append('    else\n')
+            result.append(exp)
+            if i == len(children) - 2:  # Check if it's the last child expression
+                result.append('    i32.eqz\n')
+                result.append('    i32.eqz\n')
+            result.append('    end\n')
+        return ''.join(result)
 
     def visit_additive(self, node, children):
         result = [children[0]]
