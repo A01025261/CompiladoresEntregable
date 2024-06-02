@@ -1,0 +1,28 @@
+//# Gramática del lenguaje delta
+
+comment = r'[/][/].*|[/][*](.|\n)*?[*][/]'
+
+identifier = r'[a-zA-Z]\w*'
+
+program = statement* expression EOF
+statement = declaration / assignment / if / while
+declaration = 'var' decl_variable (',' decl_variable)* ';'
+decl_variable = identifier
+assignment = lhs_variable '=' expression ';'
+lhs_variable = identifier
+if = 'if' expression block ('else' block)?
+block = '{' statement* '}'
+while = 'while' expression block
+comparison = additive (('==' / '!=' / '>=' / '>' / '<=' / '<') additive)*
+expression = comparison ('&&' comparison)*
+additive = multiplicative (('+' / '-' ) multiplicative)*
+multiplicative = unary (('*' / '/' / '%') unary)*
+unary = ('+' / '-' / '!')* primary
+primary = decimal / binary / octal / hexadecimal / boolean / parenthesis / rhs_variable
+decimal = r'\d+'
+binary = r'#b[01]+'
+octal = r'#o[0-7]+'
+hexadecimal = r'#x[0-9a-fA-F]+'
+boolean = 'true' / 'false'
+parenthesis = '(' expression ')'
+rhs_variable = identifier
