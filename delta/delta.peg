@@ -1,4 +1,5 @@
 //# Gramática del lenguaje delta
+// A01025261 Maximiliano Carrasco Rojas
 
 comment = r'[/][/].*|[/][*](.|\n)*?[*][/]'
 
@@ -10,7 +11,8 @@ declaration = 'var' decl_variable (',' decl_variable)* ';'
 decl_variable = identifier
 assignment = lhs_variable '=' expression ';'
 lhs_variable = identifier
-if = 'if' expression block ('else' block)?
+if = 'if' expression block ('else' if / 'else' block / else_if_block)?
+else_if_block = ('else if' expression block)+
 block = '{' statement* '}'
 while = 'while' expression block
 do_while = 'do' block 'while' expression ';'
